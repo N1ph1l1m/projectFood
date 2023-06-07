@@ -1,6 +1,8 @@
 "use strict";
 
 window.addEventListener("DOMContentLoaded", () => {
+
+//Tabs
   const tabs = document.querySelectorAll(".tabheader__item"),
     calcChooseParent = document.querySelector(".calculating__field"),
     calcChooseItem = document.querySelectorAll(".calculating__choose-item"),
@@ -157,4 +159,25 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     setClock('.timer',deadLine); 
+
+    //Modal
+
+    const modalTrigger = document.querySelectorAll('[data-modal]'),
+      modal = document.querySelector('.modal'),
+      modalClosedBtn = document.querySelector('[data-close]');
+
+modalTrigger.forEach(btn => {
+  btn.addEventListener('click',() => { 
+    modal.classList.add('show');
+    modal.classList.remove('hide');
+    document.body.style.overflow = 'hidden'; 
+  });
+}); 
+
+modalClosedBtn.addEventListener('click',()=>{
+  modal.classList.add('hide');
+  modal.classList.remove('show'); 
+  document.body.style.overflow = ''; 
+});
+      
 });
