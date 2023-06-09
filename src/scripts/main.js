@@ -191,36 +191,42 @@ window.addEventListener("DOMContentLoaded", () => {
       closeModal();
     }
   });
-    
 
-//   function showModalByScroll(){
-//     if(window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight){
-//       openModal();
-//       window.removeEventListener('scroll',showModalByScroll);
-//     }
-//   }
+  //   function showModalByScroll(){
+  //     if(window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight){
+  //       openModal();
+  //       window.removeEventListener('scroll',showModalByScroll);
+  //     }
+  //   }
 
-//  window.addEventListener('scroll', showModalByScroll);  
+  //  window.addEventListener('scroll', showModalByScroll);
 
-class MenuCard{
-  constructor(src,alt,title,desc,price,parentSelector) {
-    this.src = src;
-    this.alt = alt;
-    this.titel = title;
-    this.desc = desc;
-    this.price = price;
-    this.parent = document.querySelector(parentSelector);
-    this.transfer = 27;
-    this.changeToRus();
-  }
+  class MenuCard {
+    constructor(src, alt, title, desc, price, parentSelector, ...classes) {
+      this.src = src;
+      this.alt = alt;
+      this.titel = title;
+      this.desc = desc;
+      this.price = price;
+      this.classes = classes;
+      this.parent = document.querySelector(parentSelector);
+      this.transfer = 27;
+      this.changeToRus();
+    }
 
-  changeToRus(){
-    this.price = this.price * this.transfer;
-  }
-  render(){
-    const element = document.createElement('div');
-    element.innerHTML = `
-      <div class="menu__item">
+    changeToRus() {
+      this.price = this.price * this.transfer;
+    }
+    render() {
+      const element = document.createElement("div");
+      if (this.classes.length === 0) {
+        this.element = "meni_item";
+        element.classList.add(this.element);
+      } else {
+        this.classes.forEach((className) => element.classList.add(className));
+      }
+      this.classes.forEach((className) => element.classList.add(className));
+      element.innerHTML = `
         <img src=${this.src} alt=${this.alt}>
         <h3 class="menu__item-subtitle">${this.titel}</h3>
         <div class="menu__item-descr">${this.desc}</div>
@@ -230,37 +236,36 @@ class MenuCard{
             <div class="menu__item-total"><span>${this.price}</span> р/день</div>
         </div>
     `;
-    this.parent.append(element);
+      this.parent.append(element);
+    }
   }
-}
-new MenuCard(
-  '/dist/img/vegy.jpg',
-  'vegy',
-  'Меню “Фитнес" ', 
-  ' Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
-  400,
-  '.menu .container'
-  ).render();
-
-
   new MenuCard(
-  '/dist/img/elite.jpg',
-  'elite',
-  'Меню “Премиум" ', 
-  ' В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
-  600,
-  '.menu .container'
+    "/dist/img/vegy.jpg",
+    "vegy",
+    'Меню “Фитнес" ',
+    ' Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+    400,
+    ".menu .container",
+    "menu__item"
   ).render();
 
   new MenuCard(
-    '/dist/img/post.jpg',
-    'post',
-    'Меню “Пост" ', 
-    ' Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков',
+    "/dist/img/elite.jpg",
+    "elite",
+    'Меню “Премиум" ',
+    " В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!",
+    600,
+    ".menu .container",
+    "menu__item"
+  ).render();
+
+  new MenuCard(
+    "/dist/img/post.jpg",
+    "post",
+    'Меню “Пост" ',
+    " Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков",
     599,
-    '.menu .container'
-    ).render();
-  
-
-  
+    ".menu .container",
+    "menu__item"
+  ).render();
 });
