@@ -203,12 +203,13 @@ window.addEventListener("DOMContentLoaded", () => {
 //  window.addEventListener('scroll', showModalByScroll);  
 
 class MenuCard{
-  constructor(src,alt,title,desc,price,transfer) {
+  constructor(src,alt,title,desc,price,parentSelector) {
     this.src = src;
     this.alt = alt;
     this.titel = title;
     this.desc = desc;
     this.price = price;
+    this.parent = document.querySelector(parentSelector);
     this.transfer = 27;
     this.changeToRus();
   }
@@ -220,15 +221,18 @@ class MenuCard{
     const element = document.createElement('div');
     element.innerHTML = `
       <div class="menu__item">
-        <img src="/dist/img/elite.jpg" alt="elite">
-        <h3 class="menu__item-subtitle">Меню “Премиум”</h3>
-        <div class="menu__item-descr">В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!</div>
+        <img src=${this.src} alt=${this.alt}>
+        <h3 class="menu__item-subtitle">${this.titel}</h3>
+        <div class="menu__item-descr">${this.desc}</div>
         <div class="menu__item-divider"></div>
         <div class="menu__item-price">
             <div class="menu__item-cost">Цена:</div>
-            <div class="menu__item-total"><span>550</span> р/день</div>
+            <div class="menu__item-total"><span>${this.price}</span> р/день</div>
         </div>
     `;
+    this.parent.append(element);
   }
 }
+
+  
 });
