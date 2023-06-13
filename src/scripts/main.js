@@ -270,8 +270,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const forms = document.querySelectorAll("form");
 
-  const message = {
-    loading: "Loading",
+  const message = { 
+    loading: "img/form/spinner.svg",
     success: "Thanks! Soon we are callback you",
     failure: "Wtf...., whats wrong",
   };
@@ -315,13 +315,19 @@ window.addEventListener("DOMContentLoaded", () => {
   // }
 
   //form json
+  
+  
   function postData(form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      const statusMessage = document.createElement('div');
-      statusMessage.classList.add('status');
-      statusMessage.textContent = message.loading;
+      const statusMessage = document.createElement('img');
+      statusMessage.src = message.loading;
+      statusMessage.style.cssText= `
+      display:block;
+      margin: 0 auto;
+      `;
+      // statusMessage.textContent = message.loading;
       form.append(statusMessage);
 
       const request = new XMLHttpRequest();
@@ -374,6 +380,6 @@ window.addEventListener("DOMContentLoaded", () => {
       prevModalDialog.classList.add('show');
       prevModalDialog.classList.remove('hide');
       closeModal();
-    },4000);
+    },1500);
   }
 });
