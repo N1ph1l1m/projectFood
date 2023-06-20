@@ -189,14 +189,14 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  //   function showModalByScroll(){
-  //     if(window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight){
-  //       openModal();
-  //       window.removeEventListener('scroll',showModalByScroll);
-  //     }
-  //   }
+    function showModalByScroll(){
+      if(window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight){
+        openModal();
+        window.removeEventListener('scroll',showModalByScroll);
+      }
+    }
 
-  //  window.addEventListener('scroll', showModalByScroll);
+   window.addEventListener('scroll', showModalByScroll);
 
   class MenuCard {
     constructor(src, alt, title, desc, price, parentSelector, ...classes) {
