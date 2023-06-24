@@ -47,7 +47,11 @@ const paths = {
   },
   icons:{
     src: "src/icons/*",
-    dest: "dist/icons",
+    dest: "dist/icons/",
+  },
+  server:{
+    src:  "src/server/*.json",
+    dest: "dist/server",
   },
   
   
@@ -178,13 +182,18 @@ function img() {
       .pipe(gulp.dest(paths.images.dest))
   );
 }
-
-
 function icons(){
   return gulp.src(paths.icons.src)
   .pipe(gulp.dest(paths.icons.dest))
   .pipe(browserSync.stream())
 }
+
+function server(){
+  return gulp.src(paths.server.src)
+  .pipe(gulp.dest(paths.server.dest))
+  .pipe(browserSync.stream())
+}
+
 //Отслеживание функции function styles()
 function watch() {
   browserSync.init({
@@ -199,11 +208,12 @@ function watch() {
   gulp.watch(paths.scripts.src, scripts);
   gulp.watch(paths.images.src, img);
   gulp.watch(paths.icons.src, icons);
+  gulp.watch(paths.server.src, server);
   // gulp.watch(paths.jsonSync.src, jsonSync);
 
 }
 //Запуск gulp по умолчанию 
-const build = gulp.series(clean,html,otherHTMLfiles,gulp.parallel(otherHTMLfiles,stylesNull,styles,stylesMain, scripts,img,icons),watch);
+const build = gulp.series(clean,html,otherHTMLfiles,gulp.parallel(otherHTMLfiles,stylesNull,styles,stylesMain, scripts,img,icons,server),watch);
 
 //Вызов функции
 exports.clean = clean; 
