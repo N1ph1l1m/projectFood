@@ -217,14 +217,14 @@ window.addEventListener("DOMContentLoaded", () => {
     render() {
       const element = document.createElement("div");
       if (this.classes.length === 0) {
-        this.element = "menu_item";
+        this.element = "menu__item";
         element.classList.add(this.element);
       } else {
         this.classes.forEach((className) => element.classList.add(className));
       }
       this.classes.forEach((className) => element.classList.add(className));
       element.innerHTML = `
-        <div class="menu__item > <img  src=${this.src} alt=${this.alt}></div>
+        <img  src=${this.src} alt=${this.alt}>
         <h3 class="menu__item-subtitle">${this.titel}</h3>
         <div class="menu__item-descr">${this.desc}</div>
         <div class="menu__item-divider"></div>
@@ -252,35 +252,7 @@ window.addEventListener("DOMContentLoaded", () => {
       });
   });
 
-  // new MenuCard(
-  //   "img/vegy.jpg",
-  //   "vegy",
-  //   'Меню “Фитнес" ',
-  //   ' Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
-  //   400,
-  //   ".menu .container",
-  //   "menu__item"
-  // ).render();
-
-  // new MenuCard(
-  //   "img/elite.jpg",
-  //   "elite",
-  //   'Меню “Премиум" ',
-  //   " В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!",
-  //   600,
-  //   ".menu .container",
-  //   "menu__item"
-  // ).render();
-
-  // new MenuCard(
-  //   "img/post.jpg",
-  //   "post",
-  //   'Меню “Пост" ',
-  //   " Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков",
-  //   599,
-  //   ".menu .container",
-  //   "menu__item"
-  // ).render();
+  
 
     //Forms
     const forms = document.querySelectorAll("form");
