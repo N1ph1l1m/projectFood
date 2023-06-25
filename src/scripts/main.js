@@ -105,56 +105,56 @@ window.addEventListener("DOMContentLoaded", () => {
 
   //Timer
 
-  // const deadLine = "2023-06-17";
+  const deadLine = "2025-02-18";
 
-  // function getTimeRemaining(endtime) {
-  //   const t = Date.parse(endtime) - Date.parse(new Date()),
-  //     days = Math.floor(t / (1000 * 60 * 60 * 24)),
-  //     hours = Math.floor((t / (1000 * 60 * 60)) % 24),
-  //     minutes = Math.floor((t / 1000 / 60) % 60),
-  //     seconds = Math.floor((t / 1000) % 60);
+  function getTimeRemaining(endtime) {
+    const t = Date.parse(endtime) - Date.parse(new Date()),
+      days = Math.floor(t / (1000 * 60 * 60 * 24)),
+      hours = Math.floor((t / (1000 * 60 * 60)) % 24),
+      minutes = Math.floor((t / 1000 / 60) % 60),
+      seconds = Math.floor((t / 1000) % 60);
 
-  //   return {
-  //     total: t,
-  //     days: days,
-  //     hours: hours,
-  //     minutes: minutes,
-  //     seconds: seconds,
-  //   };
-  // }
-  // function getZero(num) {
-  //   if (num >= 0 && num < 10) {
-  //     return `0${num}`;
-  //   } else {
-  //     return num;
-  //   }
-  // }
+    return {
+      total: t,
+      days: days,
+      hours: hours,
+      minutes: minutes,
+      seconds: seconds,
+    };
+  }
+  function getZero(num) {
+    if (num >= 0 && num < 10) {
+      return `0${num}`;
+    } else {
+      return num;
+    }
+  }
 
-  // function setClock(selector, endtime) {
-  //   const timer = document.querySelector(selector),
-  //     days = timer.querySelector("#days"),
-  //     hours = timer.querySelector("#hours"),
-  //     minutes = timer.querySelector("#minutes"),
-  //     seconds = timer.querySelector("#seconds"),
-  //     timeInterval = setInterval(updateClock, 1000);
+  function setClock(selector, endtime) {
+    const timer = document.querySelector(selector),
+      days = timer.querySelector("#days"),
+      hours = timer.querySelector("#hours"),
+      minutes = timer.querySelector("#minutes"),
+      seconds = timer.querySelector("#seconds"),
+      timeInterval = setInterval(updateClock, 1000);
 
-  //   updateClock();
+    updateClock();
 
-  //   function updateClock() {
-  //     const t = getTimeRemaining(endtime);
+    function updateClock() {
+      const t = getTimeRemaining(endtime);
 
-  //     days.innerHTML = getZero(t.days);
-  //     hours.innerHTML = getZero(t.hours);
-  //     minutes.innerHTML = getZero(t.minutes);
-  //     seconds.innerHTML = getZero(t.seconds);
+      days.innerHTML = getZero(t.days);
+      hours.innerHTML = getZero(t.hours);
+      minutes.innerHTML = getZero(t.minutes);
+      seconds.innerHTML = getZero(t.seconds);
 
-  //     if (t.total <= 0) {
-  //       clearImmediate(timeInterval);
-  //     }
-  //   }
-  // }
+      if (t.total <= 0) {
+        clearImmediate(timeInterval);
+      }
+    }
+  }
 
-  // setClock(".timer", deadLine);
+  setClock(".timer", deadLine);
 
   //Modal
 
@@ -361,7 +361,7 @@ window.addEventListener("DOMContentLoaded", () => {
   */
 
     // new form json
-    /*
+    
   function postData(form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -380,9 +380,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
       fetch('server.php',{
         method:'POST',
-        // headers:{
-        //   'Content-type' : "application/json"
-        // },
+        headers:{
+          'Content-type' : "application/json"
+        },
         body:formData
       }).then(data =>{
             console.log(data);
@@ -395,41 +395,42 @@ window.addEventListener("DOMContentLoaded", () => {
         form.reset();
       })
 
-      // const object ={};
-      // formData.forEach(function(value,key){
-      //   object[key] = value;
-      // });
+      const object ={};
+      formData.forEach(function(value,key){
+        object[key] = value;
+      });
 
-      // const json = JSON.stringify(object);
-
-  
+      const json = JSON.stringify(object);
     });
   }
-  */
+  
 
-  // function showThanksModal(message){
-  //   const prevModalDialog = document.querySelector(".modal__dialog ");
 
-  //   prevModalDialog.classList.add('hide');
-  //   openModal();
 
-  //   const thankModal = document.createElement('div');
-  //   thankModal.classList.add('modal__dialog');
-  //   thankModal.innerHTML = `
-  //     <div class="modal__content">
-  //       <div class="modal__close" data-close>x</div>
-  //       <div class="modal__title">${message}</div>
-  //     </div>
-  //   `;
 
-  //   document.querySelector('.modal').append(thankModal);
-  //   setTimeout(() => {
-  //     thankModal.remove();
-  //     prevModalDialog.classList.add('show');
-  //     prevModalDialog.classList.remove('hide');
-  //     closeModal();
-  //   },1500);
-  // }
+  function showThanksModal(message){
+    const prevModalDialog = document.querySelector(".modal__dialog ");
+
+    prevModalDialog.classList.add('hide');
+    openModal();
+
+    const thankModal = document.createElement('div');
+    thankModal.classList.add('modal__dialog');
+    thankModal.innerHTML = `
+      <div class="modal__content">
+        <div class="modal__close" data-close>x</div>
+        <div class="modal__title">${message}</div>
+      </div>
+    `;
+
+    document.querySelector('.modal').append(thankModal);
+    setTimeout(() => {
+      thankModal.remove();
+      prevModalDialog.classList.add('show');
+      prevModalDialog.classList.remove('hide');
+      closeModal();
+    },1500);
+  }
 fetch('/server/db.json',)
   .then(data => data.json())
   .then (res => console.log(res))
