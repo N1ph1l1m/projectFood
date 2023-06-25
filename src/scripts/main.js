@@ -217,14 +217,14 @@ window.addEventListener("DOMContentLoaded", () => {
     render() {
       const element = document.createElement("div");
       if (this.classes.length === 0) {
-        this.element = "meni_item";
+        this.element = "menu_item";
         element.classList.add(this.element);
       } else {
         this.classes.forEach((className) => element.classList.add(className));
       }
       this.classes.forEach((className) => element.classList.add(className));
       element.innerHTML = `
-        <img src=${this.src} alt=${this.alt}>
+        <div class="menu__item > <img  src=${this.src} alt=${this.alt}></div>
         <h3 class="menu__item-subtitle">${this.titel}</h3>
         <div class="menu__item-descr">${this.desc}</div>
         <div class="menu__item-divider"></div>
@@ -235,36 +235,52 @@ window.addEventListener("DOMContentLoaded", () => {
     `;
       this.parent.append(element);
     }
+
   }
-  new MenuCard(
-    "img/vegy.jpg",
-    "vegy",
-    'Меню “Фитнес" ',
-    ' Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
-    400,
-    ".menu .container",
-    "menu__item"
-  ).render();
+  const getResourse  =  async(url) =>{
+    const res =  await fetch(url);
+    if(!res.ok){
+       throw new Error(`Could not fetch ${utl} , status: ${res.status}`);
+    }
+    return await res.json();
+  };
 
-  new MenuCard(
-    "img/elite.jpg",
-    "elite",
-    'Меню “Премиум" ',
-    " В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!",
-    600,
-    ".menu .container",
-    "menu__item"
-  ).render();
+  getResourse('http://localhost:3333/menu')
+    .then(data =>{
+      data.forEach(({img, altimg, title, descr, price}) => {
+        new MenuCard(img, altimg, title, descr, price,'.menu .container').render();
+      });
+  });
 
-  new MenuCard(
-    "img/post.jpg",
-    "post",
-    'Меню “Пост" ',
-    " Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков",
-    599,
-    ".menu .container",
-    "menu__item"
-  ).render();
+  // new MenuCard(
+  //   "img/vegy.jpg",
+  //   "vegy",
+  //   'Меню “Фитнес" ',
+  //   ' Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+  //   400,
+  //   ".menu .container",
+  //   "menu__item"
+  // ).render();
+
+  // new MenuCard(
+  //   "img/elite.jpg",
+  //   "elite",
+  //   'Меню “Премиум" ',
+  //   " В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!",
+  //   600,
+  //   ".menu .container",
+  //   "menu__item"
+  // ).render();
+
+  // new MenuCard(
+  //   "img/post.jpg",
+  //   "post",
+  //   'Меню “Пост" ',
+  //   " Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков",
+  //   599,
+  //   ".menu .container",
+  //   "menu__item"
+  // ).render();
 
     //Forms
     const forms = document.querySelectorAll("form");
@@ -417,6 +433,8 @@ window.addEventListener("DOMContentLoaded", () => {
       });
       return await res.json();
     };
+
+
   //post data version 4 
   function bindPostData(form) {
     form.addEventListener("submit", (e) => {
@@ -434,12 +452,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
       const formData = new FormData(form);
       
-      const object ={};
-      formData.forEach(function(value,key){
-        object[key] = value;
-      }); 
+      const json = JSON.stringify(Object.fromEntries(formData.entries()));
+    
 
-      postData(' http://localhost:3333/requests',JSON.stringify(object))
+      postData(' http://localhost:3333/requests',json)
       .then(data =>{
         console.log(data);
         showThanksModal(message.success);
@@ -452,7 +468,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   
 
-      const json = JSON.stringify(object);
+
     });
   }
 
