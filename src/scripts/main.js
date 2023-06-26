@@ -394,17 +394,17 @@ window.addEventListener("DOMContentLoaded", () => {
   */
       
   
-        const postData =  async(url, data) =>{
-      const res =  await fetch(url,{
-        method:'POST',
-        headers:{
-          'Content-type' : "application/json"
-        
-        },
-        body: data
-      });
-      return await res.json();
-    };
+  const postData =  async(url, data) =>{
+  const res =  await fetch(url,{
+    method:'POST',
+    headers:{
+      'Content-type' : "application/json"
+    
+    },
+    body: data
+  });
+  return await res.json();
+  };
 
 
   //post data version 4 
@@ -437,16 +437,8 @@ window.addEventListener("DOMContentLoaded", () => {
       }).finally(()=>{
         form.reset();
       });
-
-  
-
-
     });
   }
-
-
-
-
 
   function showThanksModal(message){
     const prevModalDialog = document.querySelector(".modal__dialog ");
@@ -471,9 +463,47 @@ window.addEventListener("DOMContentLoaded", () => {
       closeModal();
     },1500);
   }
-fetch('/server/db.json',)
-  .then(data => data.json())
-  .then (res => console.log(res))
- 
+  fetch('/server/db.json',)
+    .then(data => data.json())
+    .then (res => console.log(res))
+  
+    //Slider
 
+  
+    const slides  = document.querySelectorAll('.offer__slide'),
+    prev  = document.querySelector('.offer__slider-prev'),
+    next = document.querySelector('.offer__slider-next');
+    let slideIndex = 1;
+
+    showSlides(slideIndex);
+
+    function showSlides(n){
+      if(n > slides.length){
+        slideIndex = 1;
+      }
+
+      if(n < 1){
+        slideIndex = slides.length;
+      }
+
+      slides.forEach(item => item.style.display = 'none');
+
+      slides[slideIndex - 1].style.display = 'block';
+    }
+
+    function plusSlides(n){
+        showSlides(slideIndex += n);
+    }
+    prev.addEventListener('click',() =>{
+      plusSlides(-1);
+    });
+
+    next.addEventListener('click',() =>{
+      plusSlides(1);
+    });
+    
+  
+  
+
+    
 });
