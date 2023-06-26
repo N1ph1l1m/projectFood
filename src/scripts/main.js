@@ -468,8 +468,8 @@ window.addEventListener("DOMContentLoaded", () => {
     .then (res => console.log(res))
   
     //Slider
-
-  
+    //first version 
+    /*
     const slides  = document.querySelectorAll('.offer__slide'),
     prev  = document.querySelector('.offer__slider-prev'),
     next = document.querySelector('.offer__slider-next'),
@@ -516,8 +516,49 @@ window.addEventListener("DOMContentLoaded", () => {
     next.addEventListener('click',() =>{
       plusSlides(1);
     });
+    */
     
-  
+    //second version
+    const slides  = document.querySelectorAll('.offer__slide'),
+    prev  = document.querySelector('.offer__slider-prev'),
+    next = document.querySelector('.offer__slider-next'),
+    total = document.querySelector('#total'),
+    current = document.querySelector('#current'),
+    slidesWrapper = document.querySelector('.offer__slider-wrapper'),
+    slideField = document.querySelector('.offer__slider-inner'),
+    width = window.getComputedStyle(slidesWrapper).width;
+
+    let slideIndex = 1;
+    let offSet = 0;
+
+    slideField.style.width = 100 * slides.length +'%';
+    slideField.style.display = 'flex';
+    slideField.style.transition = '0.9s all';
+
+    slidesWrapper.style.overflow = 'hidden';
+    slides.forEach(slide =>{
+      slide.style.width = width;
+    });
+    next.addEventListener('click', () =>{
+      if(offSet == +width.slice(0,width.length - 2) * (slides.length - 1)){
+        offSet = 0;
+      }else{
+        offSet += +width.slice(0,width.length - 2);
+      }
+
+      slideField.style.transform = `translateX(-${offSet}px)`;
+    });
+
+    prev.addEventListener('click', () =>{
+      if(offSet == 0){
+        offSet = +width.slice(0,width.length - 2) * (slides.length - 1);
+      }else{
+        offSet -= +width.slice(0,width.length - 2);
+      }
+
+      slideField.style.transform = `translateX(-${offSet}px)`;
+    });
+
   
 
     
