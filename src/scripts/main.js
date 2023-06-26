@@ -531,6 +531,14 @@ window.addEventListener("DOMContentLoaded", () => {
     let slideIndex = 1;
     let offSet = 0;
 
+    if(slides.length<10){
+      total.textContent = `0${slides.length}`;
+      current.textContent = `0${slideIndex}`;
+    }else{
+      total.textContent = slides.length;
+      current.textContent = slideIndex;
+    }
+
     slideField.style.width = 100 * slides.length +'%';
     slideField.style.display = 'flex';
     slideField.style.transition = '0.9s all';
@@ -547,6 +555,17 @@ window.addEventListener("DOMContentLoaded", () => {
       }
 
       slideField.style.transform = `translateX(-${offSet}px)`;
+      if(slideIndex == slides.length){
+        slideIndex = 1;
+      }else{
+        slideIndex ++;
+      }
+
+      if(slides.length <10){
+        current.textContent = `0${slideIndex}`;
+      }else{
+        current.textContent = slideIndex;
+      }
     });
 
     prev.addEventListener('click', () =>{
@@ -557,6 +576,21 @@ window.addEventListener("DOMContentLoaded", () => {
       }
 
       slideField.style.transform = `translateX(-${offSet}px)`;
+
+      
+      slideField.style.transform = `translateX(-${offSet}px)`;
+
+      if(slideIndex == 1){
+        slideIndex = slides.length;
+      }else{
+        slideIndex --;
+      }
+
+      if(slides.length <10){
+        current.textContent = `0${slideIndex}`;
+      }else{
+        current.textContent = slideIndex;
+      }
     });
 
   
