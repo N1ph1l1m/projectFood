@@ -680,9 +680,9 @@ window.addEventListener("DOMContentLoaded", () => {
           }
           
           if(sex === 'female'){
-            calcResult.textContent = (447.6 +(9.2 * weight) + (3.1 * height) - (4.3 * age)) * ratio;
+            calcResult.textContent = Math.round((447.6 +(9.2 * weight) + (3.1 * height) - (4.3 * age)) * ratio);
           }else{
-            calcResult.textContent = (88.36 +(13.4 * weight) + (4.8 * height) - (5.7 * age)) * ratio;
+            calcResult.textContent = Math.round((88.36 +(13.4 * weight) + (4.8 * height) - (5.7 * age)) * ratio);
           }
           
         }
@@ -697,20 +697,42 @@ window.addEventListener("DOMContentLoaded", () => {
             }else{
               sex = e.target.getAttribute('id');
             }
-            console.log(ratio , sex);
 
             elements.forEach(elem => {
               elem.classList.remove(activeClass);
-
             });
             e.target.classList.add(activeClass);
           });
+          calcTotal();
         }
 
-        getStaticInformation('#gender' , '.calculating__choose-item_active');
+        getStaticInformation('#gender' , 'calculating__choose-item_active');
         
-        getStaticInformation('.calculating__choose_big' , '.calculating__choose-item_active'); 
+        getStaticInformation('.calculating__choose_big' , 'calculating__choose-item_active'); 
 
+      function getDinamicInformation(selector){
+        const input = document.querySelector(selector);
 
+        input.addEventListener('input' , () => {
+          switch(input.getAttribute('id')){
+            case 'height':
+                height = +input.value;
+                break;
+            case 'weight':
+                weight = +input.value;
+                break;
+            case 'age':
+              age = +input.value;
+              break;
+          }
+          
+          calcTotal();
+        });
+     
+      }
+
+      getDinamicInformation('#height');
+      getDinamicInformation('#weight');
+      getDinamicInformation('#age');
     
 });
