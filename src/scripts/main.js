@@ -667,9 +667,9 @@ window.addEventListener("DOMContentLoaded", () => {
     })
     //Calc
     const calcResult = document.querySelector('.calculating__result span');
-    let sex,
+    let sex = 'female',
         age,
-        ratio,
+        ratio = 1.375,
         height,
         weight;
         
@@ -690,20 +690,23 @@ window.addEventListener("DOMContentLoaded", () => {
         
         function getStaticInformation(parentSelector, activeClass){
           const elements = document.querySelectorAll(`${parentSelector} div`);
-
-          document.querySelector(parentSelector).addEventListener('click' , (e)=>{
-            if(e.target.getAttribute('data-ratio')){
-              ratio = +e.target.getAttribute('data-ratio');
-            }else{
-              sex = e.target.getAttribute('id');
-            }
-
-            elements.forEach(elem => {
-              elem.classList.remove(activeClass);
+ 
+          elements.forEach(elem =>{
+            elem.addEventListener('click' , (e)=>{
+              if(e.target.getAttribute('data-ratio')){
+                ratio = +e.target.getAttribute('data-ratio');
+              }else{
+                sex = e.target.getAttribute('id');
+              }
+  
+              elements.forEach(elem => {
+                elem.classList.remove(activeClass);
+              });
+              e.target.classList.add(activeClass);
             });
-            e.target.classList.add(activeClass);
-          });
-          calcTotal();
+            calcTotal();
+          })
+          
         }
 
         getStaticInformation('#gender' , 'calculating__choose-item_active');
