@@ -665,7 +665,29 @@ window.addEventListener("DOMContentLoaded", () => {
           dots[slideIndex -1].style.opacity = 1;
       });
     })
-  
+    //Calc
+    const calcResult = document.querySelector('.calculating__result span');
+    let sex,
+        age,
+        ratio,
+        height,
+        weight;
+        
+        function calcTotal(){
+          if(!sex || !height || !weight || !age || !ratio){
+            calcResult.textContent = "___";
+          return;
+          }
+          
+          if(sex === 'female'){
+            calcResult.textContent = (447.6 +(9.2 * weight) + (3.1 * height) - (4.3 * age)) * ratio;
+          }else{
+            calcResult.textContent = (88.36 +(13.4 * weight) + (4.8 * height) - (5.7 * age)) * ratio;
+          }
+          
+        }
+        calcTotal();
+
 
     
 });
